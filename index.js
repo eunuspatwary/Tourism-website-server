@@ -21,6 +21,7 @@ async function run() {
 
         const database = client.db("tourism");
         const servicesCollection = database.collection("services");
+        const userCollection = database.collection("user");
 
         app.post('/services', async (req, res) => {
             const service = req.body;
@@ -37,6 +38,30 @@ async function run() {
             res.send(services);
             console.log(services);
         });
+
+        // get all orders 
+        app.get('/allOrders', async (req, res) => {
+            const cursor = orderCollection.find({});
+
+            const services = await cursor.toArray();
+            console.log(services)
+            res.send(services);
+        });
+
+
+
+        //    post all orders 
+        app.post('/orders', async (req, res) => {
+            const order = req.body;
+            console.log('hit the post api');
+            const result = await orderCollection.insertOne(order);
+            console.log(result);
+            res.json(result);
+
+        })
+
+
+
 
 
 
