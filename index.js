@@ -42,12 +42,10 @@ async function run() {
         // get all orders 
         app.get('/allOrders', async (req, res) => {
             const cursor = orderCollection.find({});
-
             const services = await cursor.toArray();
             console.log(services)
             res.send(services);
         });
-
 
 
         //    post all orders 
@@ -59,10 +57,6 @@ async function run() {
             res.json(result);
 
         })
-
-
-
-
 
 
     } finally {
